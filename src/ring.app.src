@@ -1,0 +1,14 @@
+{application, ring,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {modules, [
+      ring
+  ]},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {env, []}
+ ]}.
