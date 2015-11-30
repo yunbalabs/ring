@@ -78,7 +78,7 @@ wants_claim_v2(CHash, AllNodes, Node) ->
 
 %% return indexs of all partitions wanted by this node.
 choose_claim_v2(CHash, AllNodes, Node) ->
-    Params = [{target_n_val, 3}],
+    Params = [{target_n_val, 1}],
 
     Owners = chash:nodes(CHash),
     Counts = get_counts(AllNodes, Owners),
