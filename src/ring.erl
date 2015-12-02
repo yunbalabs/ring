@@ -2,7 +2,7 @@
 
 %% ring: ring library's entry point.
 
--export([create/2, from_bin/1, add_node/2, to_bin/1, locate_key/2]).
+-export([create/2, from_bin/1, add_node/2, to_bin/1, locate_key/2, owners/1]).
 
 %% API
 
@@ -36,6 +36,9 @@ locate_key(CHashBin, Key) ->
     Itr = chashbin:iterator(Index, CHashBin),
     {Primaries, _} = chashbin:itr_pop(1, Itr),
     Primaries.
+
+owners(CHash) ->
+    chash:nodes(CHash).
 
 %% Internals
 claim_until_balanced(CHash, FinalNodes, EachNode) ->
