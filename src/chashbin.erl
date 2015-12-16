@@ -175,7 +175,7 @@ itr_pop(N, Itr=#iterator{pos=Pos, chbin=CHBin}) ->
         end,
     Pos2 = (Pos + N) rem Size,
     Itr2 = Itr#iterator{pos=Pos2},
-    {L, Itr2}.
+    {L, Itr2, Pos}.
 
 %% @doc Advance the iterator while `Pred({Index, Owner})' returns `true'
 -spec itr_next_while(pred_fun(), iterator()) -> iterator().

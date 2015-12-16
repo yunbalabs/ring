@@ -34,8 +34,8 @@ to_bin(CHash) ->
 locate_key(CHashBin, Key) ->
     Index = chash:key_of(Key),
     Itr = chashbin:iterator(Index, CHashBin),
-    {Primaries, _} = chashbin:itr_pop(1, Itr),
-    Primaries.
+    {[{Idx, Node}], _, Pos} = chashbin:itr_pop(1, Itr),
+    {Idx, Pos, Node}.
 
 owners(CHash) ->
     chash:nodes(CHash).
