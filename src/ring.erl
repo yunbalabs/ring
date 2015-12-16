@@ -2,7 +2,7 @@
 
 %% ring: ring library's entry point.
 
--export([create/2, from_bin/1, add_node/2, to_bin/1, locate_key/2, owners/1]).
+-export([create/2, from_bin/1, add_node/2, to_bin/1, locate_key/2, owners/1, diff/2]).
 
 %% API
 
@@ -39,6 +39,23 @@ locate_key(CHashBin, Key) ->
 
 owners(CHash) ->
     chash:nodes(CHash).
+
+diff(OldCHash, NewCHash) ->
+    case chash:size(OldCHash) =:= chash:size(NewCHash) of
+        true ->
+            NewOwners = chash:nodes(NewCHash),
+            lists:filtermap(
+                fun ({Idx, Node}) ->
+                    case lists:keyfind(Idx, 1, NewOwners) of
+                        {Idx, Node} ->
+                            false;
+                        {Idx, NewNode} ->
+                            {true, {Idx, Node, NewNode}}
+                    end
+                end, chash:nodes(OldCHash));
+        false ->
+            dismatch
+    end.
 
 %% Internals
 claim_until_balanced(CHash, FinalNodes, EachNode) ->
