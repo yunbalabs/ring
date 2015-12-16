@@ -2,7 +2,7 @@
 
 %% ring: ring library's entry point.
 
--export([create/2, from_bin/1, add_node/2, to_bin/1, locate_key/2, owners/1, diff/2]).
+-export([create/2, from_bin/1, add_node/2, to_bin/1, locate_key/2, owners/1, diff/2, idx2node/2]).
 
 %% API
 
@@ -56,6 +56,9 @@ diff(OldCHash, NewCHash) ->
         false ->
             dismatch
     end.
+
+idx2node(CHash, Idx) ->
+    chash:lookup(Idx, CHash).
 
 %% Internals
 claim_until_balanced(CHash, FinalNodes, EachNode) ->
